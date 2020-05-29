@@ -61,6 +61,9 @@
     },
     "drupal/blizz_dynamic_entitylist": {
       "Use admin theme for ajax to ensure front-end does not break javascript": "https://www.drupal.org/files/issues/2020-04-16/blizz-dynamic-entitylist_use-admin-theme-for-ajax_3128363-2.patch"
+    },
+    "drupal/ctools": {
+      "Allow configuring exposed views filters in block config": "https://www.drupal.org/files/issues/2020-03-30/ctools-exposed-filter-block-config-2657060-111.patch"
     }
   }
 }

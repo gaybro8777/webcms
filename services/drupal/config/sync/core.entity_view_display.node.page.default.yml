@@ -439,7 +439,8 @@ third_party_settings:
         'Group Menu Block': {  }
         'Inline blocks':
           - 'inline_block:paragraph'
-        'Lists (Views)': {  }
+        'Lists (Views)':
+          - 'views_block:dynamic_lists-block_1'
         Menus: {  }
         System: {  }
         User: {  }
