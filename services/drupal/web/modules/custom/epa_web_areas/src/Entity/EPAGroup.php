@@ -6,6 +6,7 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\group\Entity\Group;
 use Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\webform\Entity\Webform;
 
 /**
  * Extends entity for group.
@@ -36,32 +37,70 @@ class EPAGroup extends Group {
     // homepage field is empty, after save, create a web area home page node.
     if ($update === FALSE
         && $bundle == 'web_area'
-        && $this->get('field_homepage')->isEmpty()
     ) {
-      // Create body paragraph
-      $paragraph = Paragraph::create([
-        'type' => 'html',
-        'field_body' => [
-          'value'  =>  '',
-          'format' => 'filtered_html'
-        ],
-      ]);
-      $paragraph->save();
+      $resave = FALSE;
+      if ($this->get('field_homepage')->isEmpty()) {
+        // Create body paragraph
+        $paragraph = Paragraph::create([
+          'type' => 'html',
+          'field_body' => [
+            'value' => '',
+            'format' => 'filtered_html'
+          ],
+        ]);
+        $paragraph->save();
 
-      // Create node.
-      $node = Node::create([
-        'type' => 'web_area',
-        'title' => $this->label(),
-      ]);
-      $node->field_paragraphs->appendItem($paragraph);
-      $node->save();
+        // Create node.
+        $node = Node::create([
+          'type' => 'web_area',
+          'title' => $this->label(),
+        ]);
+        $node->field_paragraphs->appendItem($paragraph);
+        $node->save();
 
-      // Add node to group via entity reference and as group content.
-      $this->addContent($node, 'group_node:web_area');
-      $this->field_homepage->target_id = $node->id();
-      $this->save();
+        // Add node to group via entity reference and as group content.
+        $this->addContent($node, 'group_node:web_area');
+        $this->field_homepage->target_id = $node->id();
 
-      \Drupal::messenger()->addStatus(t('Node %label has been created.', ['%label' => $node->toLink()->toString()]));
+        \Drupal::messenger()
+          ->addStatus(t('Node %label has been created.', [
+            '%label' => $node->toLink()
+              ->toString()
+          ]));
+
+        $resave = TRUE;
+      }
+      if ($this->get('field_contact_us_form')->isEmpty()) {
+        // Create node.
+        $label = $this->label() .' Contact Form';
+        $node = Node::create([
+          'type' => 'webform',
+          'title' => $label,
+        ]);
+
+        $new_form = Webform::load('template_epa_contact_us')->createDuplicate();
+        $new_form->set('title', $label);
+        $new_form->set('id', 'group_'. $this->id() .'_contact_'. rand(1000000,9999999)); // Adds a random number to try to avoid machine name collisions.
+        $new_form->save();
+
+        $node->get('webform')->target_id = $new_form->id();
+        $node->save();
+
+        // Add node to group via entity reference and as group content.
+        $this->addContent($node, 'group_node:webform');
+        $this->field_contact_us_form->target_id = $node->id();
+
+        \Drupal::messenger()
+          ->addStatus(t('Node %label has been created.', [
+            '%label' => $node->toLink()
+              ->toString()
+          ]));
+
+        $resave = TRUE;
+      }
+      if ($resave) {
+        $this->save();
+      }
     }
   }
 
