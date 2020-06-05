@@ -73,26 +73,22 @@ class EPAGroup extends Group {
       if ($this->get('field_contact_us_form')->isEmpty()) {
         // Create node.
         $label = $this->label() .' Contact Form';
-        $node = Node::create([
+
+        $form_node = Node::create([
           'type' => 'webform',
           'title' => $label,
+          //'webform' => ['target_id' => $new_form->id()],
         ]);
 
-        $new_form = Webform::load('template_epa_contact_us')->createDuplicate();
-        $new_form->set('title', $label);
-        $new_form->set('id', 'group_'. $this->id() .'_contact_'. rand(1000000,9999999)); // Adds a random number to try to avoid machine name collisions.
-        $new_form->save();
-
-        $node->get('webform')->target_id = $new_form->id();
-        $node->save();
+        $form_node->save();
 
         // Add node to group via entity reference and as group content.
-        $this->addContent($node, 'group_node:webform');
-        $this->field_contact_us_form->target_id = $node->id();
+        $this->addContent($form_node, 'group_node:webform');
+        $this->field_contact_us_form->target_id = $form_node->id();
 
         \Drupal::messenger()
           ->addStatus(t('Node %label has been created.', [
-            '%label' => $node->toLink()
+            '%label' => $form_node->toLink()
               ->toString()
           ]));
 
