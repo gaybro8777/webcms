@@ -42,7 +42,7 @@ function epa_forms_node_insert(EntityInterface $entity) {
       ]);
     }
     $webform->save();
-    $entity->get('webform')->target_id = $id;
+    $entity->get('webform')->target_id = $webform->id();
     $entity->setSyncing(TRUE);
     $entity->save();
     \Drupal::messenger()->addStatus(t('Webform %label has been created.', ['%label' => $webform->toLink()->toString()]));
