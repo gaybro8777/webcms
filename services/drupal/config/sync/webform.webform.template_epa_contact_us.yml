@@ -187,7 +187,7 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: '[webform:author:mail]'
+      to_mail: '[webform_submission:node:group:field_editor_in_chief:entity:mail]'
       to_options: {  }
       cc_mail: ''
       cc_options: {  }
