@@ -41,7 +41,7 @@ content:
     type: basic_string
     weight: 0
     region: content
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
 hidden:
@@ -71,3 +71,4 @@ hidden:
   field_scheduled_transition: true
   field_type: true
   links: true
+  search_api_excerpt: true

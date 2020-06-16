@@ -3,5 +3,6 @@ ignored_config_entities:
   2: 'system.menu.group-*'
   4: 'smtp.settings:smtp_username'
   6: 'smtp.settings:smtp_password'
-  8: ~webform.webform.template_epa_contact_us
+  8: 'views.view.epa_custom_*'
+  10: ~webform.webform.template_epa_contact_us
 enable_export_filtering: '1'
