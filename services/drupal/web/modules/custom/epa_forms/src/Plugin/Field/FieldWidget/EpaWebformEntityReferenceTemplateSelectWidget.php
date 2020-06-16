@@ -95,7 +95,7 @@ class EpaWebformEntityReferenceTemplateSelectWidget extends OptionsWidgetBase {
 
     if ($webform) {
       $url = $webform->toUrl('edit-form');
-      $markup = t('<a href=":url" target="_blank">@title</a>',
+      $markup = t('<strong>Webform:</strong> </strong><a href=":url" target="_blank">@title</a>',
         [
           '@title' => $webform->label(),
           ':url' => $url->toString(),
