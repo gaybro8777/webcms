@@ -1,8 +1,5 @@
 'use strict';
 
-const path = require('path');
-const util = require('util');
-
 const gulp = require('gulp');
 const babel = require('gulp-babel');
 const eslint = require('gulp-eslint');
