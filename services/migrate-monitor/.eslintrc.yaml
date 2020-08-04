@@ -1,0 +1,27 @@
+parser: '@typescript-eslint/parser'
+
+settings:
+  import/extensions: [.js, .ts]
+  import/parsers:
+    '@typescript-eslint/parser': [.ts]
+
+plugins:
+  - '@typescript-eslint'
+  - prettier
+  - import
+
+extends:
+  - eslint:recommended
+  - plugin:@typescript-eslint/recommended
+  - plugin:import/recommended
+  - plugin:import/errors
+  - plugin:import/warnings
+  - plugin:import/typescript
+  - prettier
+
+rules:
+  eqeqeq: error
+
+  prettier/prettier: error
+
+  import/no-extraneous-dependencies: error
