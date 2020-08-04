@@ -101,7 +101,7 @@ resource "aws_ecs_task_definition" "migrate_task" {
           awslogs-region = var.aws-region
         }
       }
-    }
+    },
 
     # Migrate monitor container. This definition relies on the code itself, since the
     # monitor doesn't have any configurable entry points or scripts.
