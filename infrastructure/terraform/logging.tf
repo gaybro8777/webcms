@@ -12,3 +12,8 @@ resource "aws_cloudwatch_log_group" "drupal" {
 resource "aws_cloudwatch_log_group" "drush" {
   name = "/webcms-${local.env-suffix}/app-drush"
 }
+
+# Log group for the migration monitor
+resource "aws_cloudwatch_log_group" "monitor" {
+  name = "/webcms-${local.env-suffix}/app-monitor"
+}

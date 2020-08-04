@@ -302,3 +302,9 @@ variable "image-tag-drush" {
   type        = string
   default     = null
 }
+
+variable "image-tag-monitor" {
+  description = "Tag of the migrate monitor image to deploy"
+  type = string
+  default = null
+}

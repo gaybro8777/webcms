@@ -336,6 +336,24 @@ resource "aws_iam_policy" "task_secrets_access" {
   policy = data.aws_iam_policy_document.task_secrets_access.json
 }
 
+data "aws_iam_policy_document" "put_metrics" {
+  version = "2012-10-17"
+
+  statement {
+    sid       = "allowPublishingMetrics"
+    effect    = "Allow"
+    actions   = ["cloudwatch:PutMetricData"]
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_policy" "put_metrics" {
+  name        = "${local.role-prefix}MetricsPublish"
+  description = "Permits publishing CloudWatch metrics"
+
+  policy = data.aws_iam_policy_document.put_metrics.json
+}
+
 data "aws_iam_policy_document" "drupal_execution_assume_role" {
   version = "2012-10-17"
 
@@ -373,6 +391,16 @@ resource "aws_iam_role_policy_attachment" "drupal_execution_tasks" {
 resource "aws_iam_role_policy_attachment" "drupal_execution_parameters" {
   role       = aws_iam_role.drupal_execution_role.name
   policy_arn = aws_iam_policy.task_secrets_access.arn
+}
+
+# Grant the ability to call PutMetricData. This is needed not because Drupal (or even
+# Drush) publish CloudWatch metrics, but because sidecar containers associated with them
+# do. The policy permissions apply to the entire task, not individual containers, hence
+# this attachment.
+
+resource "aws_iam_role_policy_attachment" "drupal_put_metrics" {
+  role       = aws_iam_role.drupal_execution_role.name
+  policy_arn = aws_iam_policy.put_metrics.arn
 }
 
 data "aws_iam_policy_document" "utility_assume" {

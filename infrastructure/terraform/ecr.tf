@@ -29,3 +29,12 @@ resource "aws_ecr_repository" "drush" {
     Name = "${local.name-prefix} Drush"
   })
 }
+
+# Creates a repo for the migration monitor sidecar
+resource "aws_ecr_repository" "monitor" {
+  name = "webcms-migrate-monitor-${local.env-suffix}"
+
+  tags = merge(local.common-tags, {
+    Name = "${local.name-prefix} Migrate Monitor"
+  })
+}
