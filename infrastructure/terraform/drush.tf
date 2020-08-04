@@ -62,7 +62,7 @@ resource "aws_ecs_task_definition" "drush_task" {
 resource "aws_ecs_task_definition" "migrate_task" {
   # We rely on both the monitor and Drush images being available, hence the length() call
   # here.
-  count = var.image-tag-monitor != null ? length(aws_ecs_task_definition.drush) : 0
+  count = var.image-tag-monitor != null ? length(aws_ecs_task_definition.drush_task) : 0
 
   family             = "webcms-migrate-${local.env-suffix}"
   network_mode       = "awsvpc"
