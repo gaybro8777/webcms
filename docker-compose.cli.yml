@@ -18,6 +18,16 @@ services:
         source: fs-data
         target: /var/www/html/web/sites/default/files
 
+  # This is the monitoring sidecar for Drush migrations. See the README in
+  # services/migrate-monitor.
+  migrate-monitor:
+    build: ./services/migrate-monitor
+    depends_on:
+      - drush
+    environment:
+      NODE_ENV: development
+    network_mode: service:drush
+
   # AWS cli image set to talk to Minio. `f1 run aws s3 [ARG...]' is the replacement for
   # `aws s3 [ARG...]' with overrides set.
   aws:
