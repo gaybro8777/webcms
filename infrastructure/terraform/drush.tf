@@ -106,17 +106,17 @@ resource "aws_ecs_task_definition" "migrate_task" {
     # Migrate monitor container. This definition relies on the code itself, since the
     # monitor doesn't have any configurable entry points or scripts.
     {
-      name = "monitor"
+      name  = "monitor"
       image = "${aws_ecr_repository.monitor.repository_url}:${var.image-tag-monitor}"
 
-      cpu = 256
+      cpu    = 256
       memory = 256
 
       logConfiguration = {
         logDriver = "awslogs"
 
         options = {
-          awslogs-group = aws_cloudwatch_log_group.monitor.name
+          awslogs-group  = aws_cloudwatch_log_group.monitor.name
           awslogs-region = var.aws-region
         }
       }
