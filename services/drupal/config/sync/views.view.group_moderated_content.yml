@@ -84,10 +84,9 @@ display:
           columns:
             node_bulk_form: node_bulk_form
             title: title
-            type: type
+            type_1: type_1
             name: name
             moderation_state: moderation_state
-            moderation_state_1: moderation_state_1
             changed: changed
             operations: operations
           info:
@@ -103,7 +102,7 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            type:
+            type_1:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -118,13 +117,6 @@ display:
               empty_column: false
               responsive: ''
             moderation_state:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            moderation_state_1:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -274,11 +266,11 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: field
-        type:
-          id: type
-          table: node_field_data
+        type_1:
+          id: type_1
+          table: node_field_revision
           field: type
-          relationship: nid
+          relationship: none
           group_type: group
           admin_label: ''
           label: 'Content type'
@@ -667,11 +659,11 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: string
-        type:
-          id: type
-          table: node_field_data
+        type_1:
+          id: type_1
+          table: node_field_revision
           field: type
-          relationship: nid
+          relationship: none
           group_type: group
           admin_label: ''
           operator: in
@@ -679,22 +671,27 @@ display:
           group: 1
           exposed: true
           expose:
-            operator_id: type_op
+            operator_id: type_1_op
             label: 'Content type'
             description: ''
             use_operator: false
-            operator: type_op
-            identifier: type
+            operator: type_1_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: type_1
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
+              layout_editor: '0'
+              alerts_manager: '0'
+              block_manager: '0'
+              system_editor: '0'
+              system_webmaster: '0'
               administrator: '0'
             reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''

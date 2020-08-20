@@ -26,9 +26,6 @@ display:
         title:
           label: Título
           separator: ', '
-        type:
-          label: 'Tipo de contenido'
-          separator: ', '
         name:
           label: Autor
           separator: ', '
@@ -44,9 +41,6 @@ display:
         title:
           expose:
             label: Título
-        type:
-          expose:
-            label: 'Tipo de contenido'
         moderation_state:
           expose:
             label: 'Estado de moderación'
