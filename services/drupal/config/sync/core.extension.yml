@@ -16,6 +16,7 @@ module:
   breakpoint: 0
   ckeditor: 0
   ckeditor_abbreviation: 0
+  ckeditor_iframe: 0
   ckeditorheight: 0
   components: 0
   config_filter: 0
@@ -65,6 +66,7 @@ module:
   facets: 0
   facets_pretty_paths: 0
   facets_summary: 0
+  fakeobjects: 0
   field: 0
   field_group: 0
   field_ui: 0
@@ -165,7 +167,6 @@ module:
   views_ajax_get: 0
   views_autocomplete_filters: 0
   views_block_filter_block: 0
-  views_bulk_operations: 0
   views_custom_cache_tag: 0
   views_ui: 0
   viewsreference: 0
