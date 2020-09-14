@@ -42,10 +42,9 @@ data "aws_iam_policy_document" "proxy_secrets" {
   }
 
   statement {
-    sid       = "allowDecryption"
-    effect    = "Allow"
-    actions   = ["kms:Decrypt"]
-    resources = [data.aws_kms_alias.secretsmanager_alias.target_key_arn]
+    sid     = "allowDecryption"
+    effect  = "Allow"
+    actions = ["kms:Decrypt"]
 
     condition {
       test     = "StringEquals"
